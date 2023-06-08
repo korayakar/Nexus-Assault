@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
 {
     private float health;
     private float lerpTimer;
+
+    [Header("Health Bar")]
     public float maxHealth = 100f;
     public float chipSpeed = 2f;
 
@@ -16,10 +18,18 @@ public class PlayerHealth : MonoBehaviour
     public Image backHealthBar;
     public TextMeshProUGUI healthText;
 
+    [Header("Damage Overlay")]
+    public Image overlay; //Blood overlay game object
+    public float duration; 
+    public float fadeSpeed;
+
+    private float durationTimer;
+
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
+        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
     }
 
     // Update is called once per frame
@@ -34,6 +44,21 @@ public class PlayerHealth : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             RestoreHealth(Random.Range(5, 10));
+        }
+        if(overlay.color.a > 0)
+        {
+            if(health < 20)
+            {
+                return; // never stop fade process
+            }
+            durationTimer += Time.deltaTime;
+            if(durationTimer > duration)
+            {
+                //fade image
+                float tempAlpha = overlay.color.a;
+                tempAlpha -= Time.deltaTime * fadeSpeed;
+                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
+            }
         }
     }
     public void UpdateHealthUI()
@@ -68,6 +93,8 @@ public class PlayerHealth : MonoBehaviour
     {
         health -= damage;
         lerpTimer = 0f;
+        durationTimer = 0;
+        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0.6f);
     }
     public void RestoreHealth(float healAmount)
     {
