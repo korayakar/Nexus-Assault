@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GunView : MonoBehaviour
 {
-    Vector3 baseScale = new Vector3(2f, 1.5f, 0.5f);
+    Vector3 baseScale = new Vector3(0.15f, 0.15f, 0.15f);
     bool isPhone = false, isFirst = true;
-    float zRot = 0, yRot = 0;
+    float zRot = -42.3f, yRot = 0f;
     Vector3 startPos;
     private void OnEnable()
     {
