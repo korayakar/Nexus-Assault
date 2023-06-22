@@ -8,6 +8,9 @@ public class PlayerHealth : MonoBehaviour
 {
     private float health;
     private float lerpTimer;
+    private GameObject player;
+    public GameObject Player { get => player; }
+    private CharacterController cc;
 
     [Header("Health Bar")]
     public float maxHealth = 100f;
@@ -17,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
     public Image frontHealthBar;
     public Image backHealthBar;
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI deadText;
 
     [Header("Damage Overlay")]
     public Image overlay; //Blood overlay game object
@@ -24,27 +28,31 @@ public class PlayerHealth : MonoBehaviour
     public float fadeSpeed;
 
     private float durationTimer;
+    public Vector3 spawnPoint;
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
+        player = GameObject.FindGameObjectWithTag("Player");
+        cc = GetComponent<CharacterController>();
+        deadText.text = "";
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (health == 0)
+        {
+            StartCoroutine(DisplayDeadText("You Died", 2));
+            cc.enabled = false;
+            player.transform.position = spawnPoint;
+            cc.enabled = true;
+            health += 5;
+        }
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            TakeDamage(Random.Range(5, 10));
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            RestoreHealth(Random.Range(5, 10));
-        }
         if(overlay.color.a > 0)
         {
             if(health < 20)
@@ -63,7 +71,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void UpdateHealthUI()
     {
-        Debug.Log(health);
+        //Debug.Log(health);
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthBar.fillAmount;
         float hFraction = health / maxHealth; // to be between 0 and 1
@@ -106,5 +114,13 @@ public class PlayerHealth : MonoBehaviour
     {
         maxHealth += (health * 0.01f) * ((100 - level) * 0.1f);
         health = maxHealth;
+    }
+
+    IEnumerator DisplayDeadText(string message, float delay)
+    {
+        deadText.text = message;
+        deadText.enabled = true;
+        yield return new WaitForSeconds(delay);
+        deadText.enabled = false;
     }
 }

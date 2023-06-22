@@ -10,14 +10,11 @@ public class Target : MonoBehaviour
         health -= amount;
         if (health <= 0f)
         {
-            Die();
-            
+            Die();  
         }
     }
-
-    void Die()
+    public void Die()
     {
-        //GetComponent<LevelSystem>().GainExperienceFlatRate(20);
-        Destroy(gameObject);  
+        Destroy(gameObject);
     }
 }

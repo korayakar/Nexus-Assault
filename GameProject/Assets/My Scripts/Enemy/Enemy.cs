@@ -11,10 +11,12 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent Agent { get => agent; }
     public GameObject Player { get => player; }
     public MyPath myPath;
+
     [Header("Sight Values")]
     public float sightDistance = 20f;
     public float fieldOfView = 85f;
     public float eyeHeight;
+
     [Header("Weapon Values")]
     public Transform gunBarrel;
     [Range(0.1f, 10f)]
