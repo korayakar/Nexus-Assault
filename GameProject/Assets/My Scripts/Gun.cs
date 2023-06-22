@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Gun : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class Gun : MonoBehaviour
     public Animator animator;
 
     private float nextTimeToFire = 0f;
+    public TextMeshProUGUI ammoText;
 
 
     private void Start()
@@ -50,7 +52,7 @@ public class Gun : MonoBehaviour
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
         }
-
+        ammoText.text = "Magazine: " + currentAmmo + "/" + maxAmmo; ;
     }
     IEnumerator Reload()
     {
