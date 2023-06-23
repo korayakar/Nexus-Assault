@@ -40,6 +40,7 @@ public class PlayerInteract : MonoBehaviour
                 if (inputManager.onFoot.Interact.triggered)
                 {
                     interactable.BaseInteract();
+                    Destroy(interactable);
                 }
             }
         }
