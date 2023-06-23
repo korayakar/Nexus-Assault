@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 406515980}
   - component: {fileID: 406515979}
   m_Layer: 5
-  m_Name: Name
+  m_Name: GameName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,10 +549,10 @@ RectTransform:
   m_Father: {fileID: 197044710}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35.9, y: 115.9}
-  m_SizeDelta: {x: -791.6798, y: -357.71478}
+  m_AnchoredPosition: {x: 0, y: -107}
+  m_SizeDelta: {x: 0, y: 142.28522}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &406515979
 MonoBehaviour:
@@ -637,7 +637,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -174.90646, y: 0, z: -309.56836, w: 0}
+  m_margin: {x: 1.5629578, y: 0, z: -3.0429688, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

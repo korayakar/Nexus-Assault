@@ -45,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (health == 0)
         {
-            StartCoroutine(DisplayDeadText("You Died", 2));
+            StartCoroutine(DisplayDeadText("You Died", 5));
             cc.enabled = false;
             player.transform.position = spawnPoint;
             cc.enabled = true;
